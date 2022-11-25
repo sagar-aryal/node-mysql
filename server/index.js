@@ -20,7 +20,15 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParse.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
+// routes
+app.get("/api/v1/contacts/get", (req, res) => {
+  const sqlGet = "SELECT * FROM contacts";
+  db.query(sqlGet, (error, result) => {
+    res.send(result);
+  });
+});
+
+/* app.get("/", (req, res) => {
   try {
     const sqlInsert =
       "INSERT INTO contacts (name, email, contact) VALUES ('dave grey', 'davegrey@gmail.com', 0400333333)";
@@ -32,7 +40,7 @@ app.get("/", (req, res) => {
   } catch (error) {
     res.send(error);
   }
-});
+}); */
 
 app.listen(5000, () => {
   console.log("Sever is running on port 5000");
