@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,14 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = (id) => {
+    if (window.confirm("Confirm Delete Contact")) {
+      axios.delete(`http://localhost:5000/api/v1/contacts/delete/${id}`);
+      toast.success("Contact deleted successfully");
+      setTimeout(() => fetchData(), 500);
+    }
+  };
 
   return (
     <div className="container">
@@ -44,9 +53,14 @@ const Home = () => {
                   <Link to={`/update/${item.id}`}>
                     <button className="btn btn-edit">Edit</button>
                   </Link>
-                  <Link to={`/delete/${item.id}`}>
-                    <button className="btn btn-delete">Delete</button>
-                  </Link>
+
+                  <button
+                    className="btn btn-delete"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+
                   <Link to={`/view/${item.id}`}>
                     <button className="btn btn-view">View</button>
                   </Link>

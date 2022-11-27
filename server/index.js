@@ -48,6 +48,7 @@ app.delete("/api/v1/contacts/delete/:id", (req, res) => {
     if (error) {
       console.log(error);
     }
+  });
 });
 
 /* app.get("/", (req, res) => {
