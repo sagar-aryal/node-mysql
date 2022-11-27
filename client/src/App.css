@@ -109,3 +109,34 @@ tbody tr:last-of-type {
 .btn-view {
   background-color: #069b51;
 }
+
+/* View page style */
+
+.card {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  border: 1px rgb(108, 7, 224) solid;
+  align-content: center;
+  margin: 0 auto;
+}
+
+.card-header {
+  height: 30px;
+  background: #2c7264;
+  color: white;
+  text-align: center;
+}
+
+.card-header p {
+  font-size: 20px;
+}
+
+.card-container {
+  padding: 8px 16px;
+}
+
+.card-container strong,
+.card-container span {
+  float: left;
+}
