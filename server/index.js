@@ -41,10 +41,11 @@ app.post("/api/v1/contacts/post", (req, res) => {
   });
 });
 
-app.put("/api/v1/contacts/get/:id", (req, res) => {
+app.put("/api/v1/contacts/update/:id", (req, res) => {
   const { id } = req.params;
+  const { name, email, contact } = req.body;
   const sqlUpdate =
-    "UPDATE contacts SET name = ?, email = ?, contact = ? WHERE id = +";
+    "UPDATE contacts SET name = ?, email = ?, contact = ? WHERE id = ?";
   db.query(sqlUpdate, [name, email, contact, id], (error, result) => {
     if (error) {
       console.log(error);
