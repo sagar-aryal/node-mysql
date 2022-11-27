@@ -41,6 +41,18 @@ app.post("/api/v1/contacts/post", (req, res) => {
   });
 });
 
+app.put("/api/v1/contacts/get/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlUpdate =
+    "UPDATE contacts SET name = ?, email = ?, contact = ? WHERE id = +";
+  db.query(sqlUpdate, [name, email, contact, id], (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
+  });
+});
+
 app.delete("/api/v1/contacts/delete/:id", (req, res) => {
   const { id } = req.params;
   const sqlDelete = "DELETE FROM contacts WHERE id = ?";
@@ -48,6 +60,17 @@ app.delete("/api/v1/contacts/delete/:id", (req, res) => {
     if (error) {
       console.log(error);
     }
+  });
+});
+
+app.get("/api/v1/contacts/get/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlGet = "SELECT * FROM contacts WHERE id= ?";
+  db.query(sqlGet, id, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
+    res.send(result);
   });
 });
 

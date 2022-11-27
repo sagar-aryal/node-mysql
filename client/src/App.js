@@ -15,6 +15,7 @@ const App = () => {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/add" element={<AddEdit />} />
+          <Route path="/update/:id" element={<AddEdit />} />
         </Routes>
       </BrowserRouter>
     </div>
