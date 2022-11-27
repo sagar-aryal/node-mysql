@@ -35,7 +35,7 @@ const AddEdit = () => {
         toast.success("Contact data added succesfully");
         setTimeout(() => {
           navigate("/");
-        }, 5000);
+        }, 500);
       } catch (error) {
         toast.error(error.response.data);
       }

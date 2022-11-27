@@ -24,6 +24,9 @@ app.use(bodyParse.urlencoded({ extended: true }));
 app.get("/api/v1/contacts/get", (req, res) => {
   const sqlGet = "SELECT * FROM contacts";
   db.query(sqlGet, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
     res.send(result);
   });
 });
@@ -36,6 +39,15 @@ app.post("/api/v1/contacts/post", (req, res) => {
       console.log(error);
     }
   });
+});
+
+app.delete("/api/v1/contacts/delete/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlDelete = "DELETE FROM contacts WHERE id = ?";
+  db.query(sqlDelete, id, (error, result) => {
+    if (error) {
+      console.log(error);
+    }
 });
 
 /* app.get("/", (req, res) => {
