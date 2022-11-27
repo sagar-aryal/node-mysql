@@ -1,24 +1,45 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const initialInputValues = {
   name: "",
-  emai: "",
+  email: "",
   contact: "",
 };
 
 const AddEdit = () => {
+  const navigate = useNavigate();
   const [inputValues, setInputValues] = useState(initialInputValues);
 
   const { name, email, contact } = inputValues;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setInputValues((prev) => [...prev, { ...inputValues, [name]: value }]);
+    setInputValues({ ...inputValues, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name || !email || !contact) {
+      toast.error("Please enter all the input values");
+    } else {
+      try {
+        axios.post("http://localhost:5000/api/v1/contacts/post", {
+          name,
+          email,
+          contact,
+        });
+        setInputValues(initialInputValues);
+        toast.success("Contact data added succesfully");
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    }
   };
 
   return (
@@ -31,6 +52,7 @@ const AddEdit = () => {
           placeholder="Full Name..."
           value={name}
           onChange={handleInputChange}
+          autoComplete="off"
         />
         <label htmlFor="email">Email</label>
         <input
@@ -39,6 +61,7 @@ const AddEdit = () => {
           placeholder="Email Address..."
           value={email}
           onChange={handleInputChange}
+          autoComplete="off"
         />
         <label htmlFor="contact">Contact</label>
         <input
@@ -47,6 +70,7 @@ const AddEdit = () => {
           placeholder="Contact Number..."
           value={contact}
           onChange={handleInputChange}
+          autoComplete="off"
         />
         <input type="submit" value="Add" />
         <Link to="/">

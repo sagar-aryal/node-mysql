@@ -31,11 +31,10 @@ app.get("/api/v1/contacts/get", (req, res) => {
 app.post("/api/v1/contacts/post", (req, res) => {
   const { name, email, contact } = req.body;
   const sqlPost = "INSERT INTO contacts (name, email, contact) VALUES(?, ?, ?)";
-  db.query(sqlGet, [name, email, contact], (error, result) => {
+  db.query(sqlPost, [name, email, contact], (error, result) => {
     if (error) {
       console.log(error);
     }
-    res.send(result);
   });
 });
 
