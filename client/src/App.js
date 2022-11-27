@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import AddEdit from "./pages/AddEdit";
 
 import "./App.css";
 import { ToastContainer } from "react-toastify";
@@ -13,6 +14,7 @@ const App = () => {
         <ToastContainer position="top-center" />
         <Routes>
           <Route index element={<Home />} />
+          <Route path="/add" element={<AddEdit />} />
         </Routes>
       </BrowserRouter>
     </div>

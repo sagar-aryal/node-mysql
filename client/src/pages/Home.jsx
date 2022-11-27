@@ -17,7 +17,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
+      <Link to="/add">
+        <button className="btn btn-add">Add Contact</button>
+      </Link>
+
       <table>
         <thead>
           <tr>
